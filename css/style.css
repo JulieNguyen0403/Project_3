@@ -1,0 +1,488 @@
+/* !Note */
+/* Nhược điểm của float:
+- Thằng tag cha mất đi chiều cao => Vị trí ở những vị trí floa mất đi background
+- Canh chỉnh width của các phần tử con 
+- Phải clear sau khi dùng float */
+
+
+/* Margin là khoảng cách giữa các thẻ, còn padding là khoảng cách cha con */
+
+
+/* Phím tắt (Shortcut)
+-Dùng Ctrl+ D để quét khối
+-Ctrl+ enter: Xuống hàng
+-Alt+ down arrow: để di chuyển thẻ xuống
+-Ctrl+Shift= F12: mở inspection */
+
+
+/* Red Border Extension:
+Ctrl+b: để thấy đường đỏ */
+
+/* Kỹ thuật grid:
+Tạo gần giống với thẻ table */
+
+
+/* !> Lựa chọn thư viện:
+- Theo yêu cầu của dự án
+- Nếu dự án không yêu cầu 
+    + Có hướng dẫn sử dụng
+    + Có demo, ví dụ
+    + Được nhiều Dev tin cậy (vô trang github)
+
+>Có nên dùng thư viện cho dự án:
+- Có nên dùng thư viện cho dự án 
+    + Deadline: 
+        Ngắn: dùng thư viện 
+        Dài: Có thể tự code 
+    
+    + Có yêu cầu bảo mật?
+        Cao: Tự code
+        Thấp: Dùng thư viện
+
+    + Chi phí dự á 
+        Tiền nhiều: Tự code
+        Tiền ít: Dùng thư viện
+
+> Các thao tác khi dùng dự á
+    - Đọc hướng dẫn 
+    - Cài đặt thư viện 
+    - Sử dụng thư viện 
+    - Chỉnh sửa thư viện khi cần (KHÔNG ĐƯỢC SỬA CODE THƯ VIỆN => Lấy code mình đè lên thư viện)
+
+!> Các bước xây dựng UI có dùng thư viện:
+    - B1: Phân tích bố cục các thẻ không dùng thư viện
+    - B2: Đọc hướng dẫn sử dụng
+    - B3: Xây dựng html
+    - B4: Gắn hiệu ứng của thư viện lên html */
+
+
+/* FLOAT-FLEX-GRID: 
+> FLoat: 
+    - Ưu điểm:
+        + Dùng được cho các trình duyệt cũ (các web cũ)
+        + 
+> Flex: 
+    - Ưu điểm:
+        + Sử dụng được cho các web mới 
+    
+> Flex vs Grid: 
+- Nếu dồn hàng đơn giản => Flex
+- Nếu dồn NHIỀU HÀNG/ NHIỀU CỘT => Grid */
+
+/* ?Ứng dụng chung cho code CSS3:
+?-B1: Tạo bố cục (Sắp xếp 1 hàng hoặc nhiều hàng- giống table)
+?+ Grid
+?+Các thành phần cần nằm đúng vị trí
+?Kích thước hình đều theo thẻ cha=> %
+
+?-B2: Thêm khoảng cách
+
+?-B3: Tạo hiệu ứng khi :hover
+?+ Tạo các thẻ html cho phần hiệu ứng
+?+ Xây dựng bố cục của thẻ khi hiển thik
+?+ Phân tích từng hiệu ứng
+
+?-B4: Các xử lý của thư viện 
+
+!*** Ẩn hiện vs Di chuyển
+-Luôn xử lý di chuyển trước/
+
+/*! GLOBAL */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* html{
+    font-family: 'Oswald', sans-serif;
+}
+
+body{
+    font-family: 'Oswald', sans-serif;
+} */
+
+/*! viết rút gọn bộ selector (code CSS của các bộ selector giống y nhau) */
+
+html, body{
+    font-family: 'Oswald', sans-serif;
+
+}
+
+.container{
+    width: 75%;
+    margin: auto;
+}
+
+/* Code dùng chung */
+.title{
+    text-align: center;
+    padding: 50px 0;
+}
+.title .sub_title{
+    color:#e62b4a;
+}
+
+.title h2{
+    color:white;
+    font-size: 50px;
+    font-weight: 400;
+}
+
+.title p{
+    color: gray;
+}
+
+.title--edit .sub_title, 
+.title--edit h2{
+    color:black;
+}
+
+/* HEADER */
+header {
+    background-color: black;
+    padding: 20px;
+}
+
+header .header_content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav ul {
+    list-style: none;
+}
+
+header nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+}
+
+header .header_content .header_logo{
+    text-decoration: none;
+    color: white;
+    font-size: 35px;
+}
+
+header ul .active a {
+    color:#e62b4a;
+}
+
+header ul li a:hover{
+    color:#e62b4a;
+}
+
+
+
+/* BANNER */
+
+.banner {
+    background-image: url(./../img/home_slider.jpg);
+    height:80vh;
+
+    /* !Bộ ba quyền lực đi kèm với background-image: ; bao gồm (background-repeat: background-size: background-position:) */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+
+
+}
+
+.banner_content .sub_title{
+    font-size: 25px;
+}
+.banner h1 {
+    font-size: 75px;
+    line-height: 1.2;
+}
+.banner button{
+    background-color:#e62b4a ;
+    color: white;
+    padding: 10px 25px;
+    text-transform: uppercase;
+    border: 1px solid #e62b4a;
+    transition: all 0.5s;
+    margin-top: 10px;
+}
+
+.banner button:hover{
+    background-color:  #af2238; 
+}
+
+/* SERVICES */
+.services{
+    background-color: black;
+    padding: 50px 0;
+    text-align: center;
+    color: white;
+
+}
+/* .services .services_title .sub_title{
+    color:#e62b4a;
+}
+
+.services .services_title h2{
+    color:white;
+    font-size: 50px;
+    font-weight: 400;
+}
+
+.services .services_title p{
+    color: gray;
+} */
+
+
+/* SERVICES CONTENT */
+.services_item{
+    background-color: black;
+    color:gray;
+    padding: 20px;
+}
+
+.item_container{
+    background-color: white;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.item_container::after{
+    content:"";
+    position:absolute;
+    top: 0;
+    right: 0;
+    width: 5px;
+    height: 0%;
+    background: #af2238;
+    transition: all 0.3s;
+}
+
+.item_container:hover::after{
+    height: 100%;
+}
+
+.slick-dots li button:before {
+    font-size: 10px;
+    opacity: 1;
+    color: white;
+}
+
+.slick-dots li.slick-active button:before {
+    color:#af2238;
+}
+
+
+/* BLOG */
+.blog{
+    padding: 50px 0;
+}
+
+
+.blog__list{
+    display: grid;
+
+/* !Đơn vị riêng của GRID: fr;
+!- fr: 4 cột, 1fr 1fr 1fr 1fr =>1/4 */
+
+/* Xác định số lượng cột; kích thước mỗi cột*/
+    grid-template-columns: repeat(4,1fr);
+/* Xác định số lượng hàng, KHI CÁC HÀNG CÓ KÍCH THÍCH KHÁC NHAU 
+grid-template-rows*/
+
+/* !Thêm khoảng cách trong phạm vi của grid, khoảng cách giữa các khối item con của grid */
+    gap: 20px; ;
+}
+
+.blog__item1{
+    /* Khai báo cột cần chiếm (gôm cột) */
+    /* !C1:Đường bắt đầu/đường kết thúc
+        !C2: đường bắt đầu/span số lượng cột chiếm */
+    grid-column:1/3; /*grid-column: 1/ span 2 */
+     /* Khai báo hàng cần chiếm (gôm hàng) */
+    grid-row: 1/3;
+   
+}
+
+.blog__item10{
+    grid-column:3/5; 
+    grid-row: 3/5;
+}
+
+
+/* !Cách 1: Nếu là ảnh nền background-image:
+!- background-size:cover;
+** Tuy nhiên nếu là image => Object-fit */
+
+
+
+.blog__item img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    /* ?Dùng filter chỉ dùng cho ẢNH */
+
+    filter: grayscale(50%) contrast(50%);
+}
+
+/* Xây dựng bố cục ban đầu trước khi thêm hiệu ứng */
+.blog__item{
+    position: relative;
+
+    /* ?Che đi vùng thẻ con bị tràn bởi border của cha */
+    overflow: hidden;
+    
+}
+/* C1: Thay đổi TOP 
+C2: Thay đổi MARGIN-TOP 
+C3:Dùng TRANSLATE
+- Trong CSS3- Công cụ giúp hỗ trợ di chuyển thẻ
+* Nếu muốn chỉ thay đổi trục X/Y => Dùng translateX/ translateY
+* Nếu muốn di chuyển CẢ trục X và Y => Translate(x,y) */
+
+/* !Trước hover */
+.blog__overlay{
+    background-color: rgba(230, 43, 74, 0.6);
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+/* !Sau hover */
+.blog__item:hover .blog__overlay{
+    opacity: 1;
+}
+
+
+/* !Trước hover */
+.blog__icon{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 20px;
+    background: white;
+    color:black;
+    padding: 10px;
+    /* Trước hover  */
+    transform: translateY(20px);
+    /* !Transition nên được đặt ở trước hover
+    - Time ít => Vận tốc nhanh 
+    - Time nhiều => Vận tốc chậm
+    ***1000ms= 1s*/
+    transition: all 0.5s;
+}
+
+/* !Sau Hover */
+/* ?Thẻ cha được hover nhưng THẺ CON THAY ĐỔI */
+.blog__item:hover .blog__icon{
+    transform: translateY(0);
+}
+
+/* !Trước hover */
+.blog__text{
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    /* Trước hover  */
+    transform: translateY(20px);
+    transition: all 0.5s;
+}
+
+
+/* !Sau hover */
+
+.blog__item:hover .blog__text{
+    transform: translateY(0);
+}
+
+
+.blog__text p{
+    color: white;
+    font-weight: bold;
+}
+
+.blog__text h3{
+    color: rgb(192, 189, 189);
+    font-weight: lighter;
+}
+
+
+/* NUMBER */
+
+.number{
+    background-color: black;
+    /* !padding thường được xét từ 50-150px */
+    padding: 100px 0;
+    color: white;
+}
+
+/* flex, grid: Chỉnh thẻ con kiếm thẻ cha gần nhất */
+.number__content{
+    display: flex;
+    /* !justify-content: thêm khoảng cách trái/ phải (theo chiều ngang) cho flex (phải còn vùng trống); 
+    
+    **Nếu không dùng được thì dùng padding để thêm khoảng cách*/
+    justify-content: space-between;
+    /* !align-items: chỉ nên dùng khi kích thước chiều cao của các chữ khác nhau; */
+    text-align: center;
+}
+
+/* !> Tìm thẻ theo thứ tự thẻ */
+/* first-child, :last-child: có nhược điểm khi có loại thẻ khác xuất hiện giữa các thẻ p
+- Đếm thứ tự => Lấy loại thẻ
+    + number__item:first-child{} */
+
+/* First-of-type: 
+- Tìm loại thẻ
+- Đếm thứ tự thẻ theo danh sach các thẻ tìm được */
+
+/* .number__item p:nth-of-type(2){
+
+} */
+
+.number__item p:first-of-type{
+    font-size:40px ;
+
+}
+
+.number__item p:last-of-type{
+    font-size:20px ;
+    color: #888888;
+}
+
+/* EXP */
+.exp{
+    background-image: url(../img/bussiness_img_1.jpg);
+
+    /* Nhược điểm của background-attachment: không dùng được trên ipad */
+    background-attachment: fixed;
+    background-size: cover;
+    padding: 70px 0;
+}
+
+.exp__content video{
+    width: 100%;
+}
+
+/* .exp__content iframe{
+    width: 100%;
+    height: 500px;
+} */
